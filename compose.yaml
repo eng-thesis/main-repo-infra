@@ -12,7 +12,7 @@ services:
       - test-network
   nginx:
     build:
-      context: /home/user/test-infrastucture/reverse-proxy
+      context: ./reverse-proxy
       dockerfile: Dockerfile
     container_name: test-nginx
     restart: always
@@ -21,11 +21,11 @@ services:
     networks:
       - test-network
     volumes:
-      - /home/user/test-infrastucture/reverse-proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./reverse-proxy/nginx.conf:/etc/nginx/nginx.conf:ro
   example-web-server:
     container_name: test-web-server
     build:
-      context: /home/user/test-infrastucture/ofiary/example-web-server/ExampleWebServer
+      context: ./ExampleWebServer
       dockerfile: Dockerfile
     networks:
       - test-network
