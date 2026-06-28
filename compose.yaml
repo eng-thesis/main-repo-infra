@@ -10,6 +10,22 @@ services:
     hostname: "rabbitmq"
     networks:
       - test-network
+  hypervisor:
+    build:
+      context: ./hypervisor
+      dockerfile: Dockerfile
+    container_name: hypervisor
+    restart: always
+    environment:
+      RABBITMQ_HOST: "rabbitmq"
+      RABBITMQ_USER: "user"
+      RABBITMQ_PASS: "zaq1@WSX"
+    networks:
+      - test-network
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - rabbitmq
   nginx:
     build:
       context: ./reverse-proxy
